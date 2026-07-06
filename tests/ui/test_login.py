@@ -10,7 +10,7 @@ logger = get_logger(__name__)
 
 
 @pytest.mark.ui
-def test_login_valido_redirige_a_inventario(driver):
+def test_login_valido(driver):
     users = read_json("users.json")
     login_page = LoginPage(driver)
     inventory_page = InventoryPage(driver)
@@ -27,7 +27,7 @@ def test_login_valido_redirige_a_inventario(driver):
 
 
 @pytest.mark.ui
-def test_login_invalido_muestra_mensaje_de_error(driver):
+def test_login_invalido(driver):
     invalid_users = read_json("users.json")["invalid_users"]
     login_page = LoginPage(driver)
 

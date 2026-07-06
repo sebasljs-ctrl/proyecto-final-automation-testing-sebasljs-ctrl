@@ -22,7 +22,7 @@ def login_as_standard_user(driver):
 
 
 @pytest.mark.ui
-def test_checkout_completo(driver):
+def test_checkout(driver):
     checkout_data = read_json("checkout_data.json")["customer"]
     login_as_standard_user(driver)
     inventory_page = InventoryPage(driver)
@@ -41,4 +41,3 @@ def test_checkout_completo(driver):
     checkout_page.finish_purchase()
 
     assert checkout_page.confirmation_message() == "Thank you for your order!"
-

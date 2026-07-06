@@ -100,15 +100,15 @@ El reporte HTML se genera automaticamente en:
 reports/report.html
 ```
 
-El reporte muestra los tests ejecutados, estado, duracion y evidencia de fallos cuando corresponda.
+El reporte muestra tests ejecutados, estado, duracion y evidencia de fallos cuando corresponda.
 
 ## Evidencias
 
-- Capturas de pantalla ante fallos: `screenshots/`
+- Capturas ante fallos: `screenshots/`
 - Logs de ejecucion: `logs/test_execution.log`
 - Reporte HTML: `reports/report.html`
 
-Las capturas se generan automaticamente desde `conftest.py` cuando falla una prueba UI. El nombre incluye el test y una marca de fecha/hora para facilitar la trazabilidad.
+Las capturas se generan automaticamente desde `conftest.py` cuando falla una prueba UI. El nombre usa una etiqueta corta del test y fecha/hora compacta, como `checkout_20260706_173000.png`.
 
 ## Datos de prueba
 

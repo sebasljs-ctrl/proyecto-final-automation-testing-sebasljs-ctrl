@@ -21,7 +21,7 @@ def login_as_standard_user(driver):
 
 
 @pytest.mark.ui
-def test_agregar_producto_al_carrito(driver):
+def test_carrito(driver):
     login_as_standard_user(driver)
     inventory_page = InventoryPage(driver)
     cart_page = CartPage(driver)
@@ -33,4 +33,3 @@ def test_agregar_producto_al_carrito(driver):
 
     inventory_page.open_cart()
     assert cart_page.item_name() == product_name
-

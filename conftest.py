@@ -11,6 +11,15 @@ from utils.logger import get_logger
 logger = get_logger(__name__)
 
 
+SCREENSHOT_NAMES = {
+    "test_login_valido": "login_valido",
+    "test_login_invalido": "login_invalido",
+    "test_productos": "productos",
+    "test_carrito": "carrito",
+    "test_checkout": "checkout",
+}
+
+
 @pytest.fixture
 def driver(request):
     driver_instance = create_driver()
@@ -36,7 +45,8 @@ def pytest_runtest_makereport(item, call):
     screenshots_dir = Path("screenshots")
     screenshots_dir.mkdir(exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    screenshot_path = screenshots_dir / f"{item.name}_{timestamp}.png"
+    screenshot_name = SCREENSHOT_NAMES.get(item.name, item.name.replace("test_", ""))
+    screenshot_path = screenshots_dir / f"{screenshot_name}_{timestamp}.png"
     driver_instance.save_screenshot(str(screenshot_path))
     logger.error("Screenshot saved after failure: %s", screenshot_path)
 

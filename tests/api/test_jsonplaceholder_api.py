@@ -10,7 +10,7 @@ logger = get_logger(__name__)
 
 
 @pytest.mark.api
-def test_get_posts_valida_escenario_exitoso_y_error():
+def test_api_get():
     logger.info("Requesting existing and non existing posts")
     response = requests.get(f"{API_BASE_URL}/posts/1", timeout=10)
     body = response.json()
@@ -25,7 +25,7 @@ def test_get_posts_valida_escenario_exitoso_y_error():
 
 
 @pytest.mark.api
-def test_crear_post():
+def test_api_post():
     payload = read_json("api_payloads.json")["new_post"]
     logger.info("Creating post with API")
     response = requests.post(f"{API_BASE_URL}/posts", json=payload, timeout=10)
@@ -39,7 +39,7 @@ def test_crear_post():
 
 
 @pytest.mark.api
-def test_eliminar_post():
+def test_api_delete():
     logger.info("Deleting post with API")
     response = requests.delete(f"{API_BASE_URL}/posts/1", timeout=10)
 
