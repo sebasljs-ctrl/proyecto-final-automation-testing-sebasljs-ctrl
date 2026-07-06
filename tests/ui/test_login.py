@@ -27,13 +27,13 @@ def test_login_valido_redirige_a_inventario(driver):
 
 
 @pytest.mark.ui
-@pytest.mark.parametrize("invalid_user", read_json("users.json")["invalid_users"])
-def test_login_invalido_muestra_mensaje_de_error(driver, invalid_user):
+def test_login_invalido_muestra_mensaje_de_error(driver):
+    invalid_users = read_json("users.json")["invalid_users"]
     login_page = LoginPage(driver)
 
-    logger.info("Opening login page for invalid login")
-    login_page.open()
-    login_page.login(invalid_user["username"], invalid_user["password"])
+    for invalid_user in invalid_users:
+        logger.info("Opening login page for invalid login")
+        login_page.open()
+        login_page.login(invalid_user["username"], invalid_user["password"])
 
-    assert "Epic sadface" in login_page.get_error_message()
-
+        assert "Epic sadface" in login_page.get_error_message()

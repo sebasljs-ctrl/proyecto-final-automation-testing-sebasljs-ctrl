@@ -10,8 +10,8 @@ logger = get_logger(__name__)
 
 
 @pytest.mark.api
-def test_get_post_existente():
-    logger.info("Requesting existing post")
+def test_get_posts_valida_escenario_exitoso_y_error():
+    logger.info("Requesting existing and non existing posts")
     response = requests.get(f"{API_BASE_URL}/posts/1", timeout=10)
     body = response.json()
 
@@ -20,13 +20,8 @@ def test_get_post_existente():
     assert "title" in body
     assert "body" in body
 
-
-@pytest.mark.api
-def test_get_post_inexistente_retorna_404():
-    logger.info("Requesting non existing post")
-    response = requests.get(f"{API_BASE_URL}/posts/999999", timeout=10)
-
-    assert response.status_code == 404
+    error_response = requests.get(f"{API_BASE_URL}/posts/999999", timeout=10)
+    assert error_response.status_code == 404
 
 
 @pytest.mark.api
@@ -49,4 +44,3 @@ def test_eliminar_post():
     response = requests.delete(f"{API_BASE_URL}/posts/1", timeout=10)
 
     assert response.status_code == 200
-

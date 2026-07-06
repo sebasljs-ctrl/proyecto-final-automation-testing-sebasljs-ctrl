@@ -48,6 +48,11 @@ python -m pip install -r requirements.txt
 
 ## Ejecucion de pruebas
 
+La suite final se mantiene ajustada a lo necesario para la consigna:
+
+- 5 casos UI con Selenium.
+- 3 casos API con Requests.
+
 Ejecutar todas las pruebas:
 
 ```powershell

@@ -17,13 +17,26 @@ class BasePage:
         return self.wait.until(EC.element_to_be_clickable(locator))
 
     def click(self, locator):
-        self.find_clickable(locator).click()
+        element = self.find_clickable(locator)
+        self.driver.execute_script(
+            "arguments[0].scrollIntoView({block: 'center'});",
+            element,
+        )
+        self.driver.execute_script("arguments[0].click();", element)
 
     def type_text(self, locator, text):
         element = self.find_visible(locator)
         element.clear()
         element.send_keys(text)
+        self.driver.execute_script(
+            """
+            arguments[0].value = arguments[1];
+            arguments[0].dispatchEvent(new Event('input', { bubbles: true }));
+            arguments[0].dispatchEvent(new Event('change', { bubbles: true }));
+            """,
+            element,
+            text,
+        )
 
     def get_text(self, locator):
         return self.find_visible(locator).text
-

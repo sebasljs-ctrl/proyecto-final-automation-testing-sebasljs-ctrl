@@ -8,7 +8,7 @@ class InventoryPage(BasePage):
     TITLE = (By.CLASS_NAME, "title")
     PRODUCT_ITEMS = (By.CLASS_NAME, "inventory_item")
     FIRST_PRODUCT_NAME = (By.CSS_SELECTOR, ".inventory_item_name")
-    FIRST_ADD_BUTTON = (By.CSS_SELECTOR, ".inventory_item button")
+    FIRST_ADD_BUTTON = (By.ID, "add-to-cart-sauce-labs-backpack")
     CART_BADGE = (By.CLASS_NAME, "shopping_cart_badge")
     CART_LINK = (By.CLASS_NAME, "shopping_cart_link")
     SORT_SELECT = (By.CLASS_NAME, "product_sort_container")
@@ -36,4 +36,3 @@ class InventoryPage(BasePage):
 
     def is_sort_visible(self):
         return self.find_visible(self.SORT_SELECT).is_displayed()
-

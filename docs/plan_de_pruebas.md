@@ -26,9 +26,10 @@ El framework valida flujos principales del sitio Saucedemo y endpoints publicos 
 | ID | Metodo | Caso |
 | --- | --- | --- |
 | API-001 | GET | Obtener post existente |
-| API-002 | GET | Validar post inexistente |
-| API-003 | POST | Crear post |
-| API-004 | DELETE | Eliminar post |
+| API-002 | POST | Crear post |
+| API-003 | DELETE | Eliminar post |
+
+El caso API-001 valida tanto respuesta exitosa como respuesta de error para cubrir ambos escenarios sin agregar casos innecesarios.
 
 ## Criterios de aceptacion
 
@@ -36,4 +37,3 @@ El framework valida flujos principales del sitio Saucedemo y endpoints publicos 
 - Los reportes deben mostrar estado y duracion.
 - Los logs deben registrar pasos clave.
 - Ante fallos UI debe generarse una captura en `screenshots/`.
-
