@@ -122,6 +122,10 @@ Los datos se leen desde archivos JSON ubicados en `data/`.
 
 El workflow ubicado en `.github/workflows/tests.yml` ejecuta las pruebas en cada `push` o `pull_request` y guarda reportes, logs y capturas como artefactos.
 
+## Control de versiones
+
+El proyecto usa `main` como rama principal. Las mejoras se preparan en ramas cortas, se revisan localmente y luego se integran a `main` con commits simples y descriptivos.
+
 ## Autor
 
 Usuario GitHub: `sebasljs-ctrl`
