@@ -1,6 +1,12 @@
-# Proyecto Final - Automation Testing
+# proyecto-final-automation-testing-sebasljs-ctrl
 
-Framework de automatizacion de pruebas desarrollado para la entrega final del curso de QA Automation.
+Framework de automatizacion de pruebas desarrollado por `sebasljs-ctrl` para la entrega final del curso de QA Automation.
+
+Repositorio publico:
+
+```text
+https://github.com/sebasljs-ctrl/proyecto-final-automation-testing-sebasljs-ctrl
+```
 
 ## Sitios utilizados
 
@@ -118,4 +124,4 @@ El workflow ubicado en `.github/workflows/tests.yml` ejecuta las pruebas en cada
 
 ## Autor
 
-GitHub: sebasljs-ctrl
+Usuario GitHub: `sebasljs-ctrl`
