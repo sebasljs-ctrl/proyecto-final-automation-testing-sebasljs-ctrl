@@ -96,5 +96,4 @@ El workflow ubicado en `.github/workflows/tests.yml` ejecuta las pruebas en cada
 
 ## Autor
 
-Reemplazar este texto por nombre y apellido antes de entregar.
-
+GitHub: sebasljs-ctrl
