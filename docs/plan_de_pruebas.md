@@ -10,6 +10,29 @@ El framework valida flujos principales del sitio Saucedemo y endpoints publicos 
 - Validar escenarios positivos y negativos.
 - Ejecutar pruebas API con distintos metodos HTTP.
 - Generar reportes HTML, logs y capturas ante fallos.
+- Evidenciar el uso de Page Object Model para separar tests e interacciones web.
+
+## Estrategia Page Object Model
+
+La logica de Selenium queda encapsulada en `pages/`. Cada clase representa una pantalla del flujo automatizado:
+
+| Clase | Responsabilidad |
+| --- | --- |
+| LoginPage | Abrir Saucedemo, iniciar sesion y obtener errores de login |
+| InventoryPage | Validar inventario, productos, filtro y carrito |
+| CartPage | Validar producto agregado y avanzar a checkout |
+| CheckoutPage | Completar datos, finalizar compra y validar confirmacion |
+
+Los tests de `tests/ui/` usan estos metodos de pagina y mantienen solo el flujo de negocio y las assertions.
+
+## Gestion de capturas
+
+Las capturas automaticas se gestionan desde `conftest.py` con el hook `pytest_runtest_makereport`.
+
+- Se generan solo ante fallos.
+- Se guardan en `screenshots/`.
+- El nombre incluye test, fecha y hora.
+- Se adjuntan al reporte HTML cuando `pytest-html` esta disponible.
 
 ## Casos UI
 

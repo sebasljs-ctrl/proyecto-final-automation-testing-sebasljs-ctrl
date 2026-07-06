@@ -31,6 +31,21 @@ logs/               Logs de ejecucion
 .github/workflows/  Integracion continua con GitHub Actions
 ```
 
+## Page Object Model
+
+La automatizacion UI separa la logica de interaccion de la logica de validacion:
+
+- `pages/`: contiene localizadores y acciones de cada pantalla.
+- `tests/ui/`: contiene los flujos de prueba y assertions.
+- `pages/base_page.py`: centraliza esperas explicitas, clicks, escritura de texto y lectura de elementos.
+
+Clases principales:
+
+- `LoginPage`: apertura del sitio, login y lectura de mensajes de error.
+- `InventoryPage`: validacion de inventario, productos, filtro y carrito.
+- `CartPage`: validacion del producto agregado y acceso a checkout.
+- `CheckoutPage`: carga de datos de compra, finalizacion y mensaje de confirmacion.
+
 ## Instalacion
 
 Crear y activar un entorno virtual:
@@ -86,6 +101,8 @@ El reporte muestra los tests ejecutados, estado, duracion y evidencia de fallos 
 - Capturas de pantalla ante fallos: `screenshots/`
 - Logs de ejecucion: `logs/test_execution.log`
 - Reporte HTML: `reports/report.html`
+
+Las capturas se generan automaticamente desde `conftest.py` cuando falla una prueba UI. El nombre incluye el test y una marca de fecha/hora para facilitar la trazabilidad.
 
 ## Datos de prueba
 
