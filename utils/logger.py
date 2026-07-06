@@ -12,9 +12,7 @@ def get_logger(name):
         return logger
 
     logger.setLevel(logging.INFO)
-    formatter = logging.Formatter(
-        "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
-    )
+    formatter = logging.Formatter("%(levelname)s | %(name)s | %(message)s")
 
     file_handler = logging.FileHandler(LOGS_DIR / "test_execution.log", encoding="utf-8")
     file_handler.setFormatter(formatter)
@@ -25,4 +23,3 @@ def get_logger(name):
     logger.addHandler(file_handler)
     logger.addHandler(stream_handler)
     return logger
-

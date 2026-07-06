@@ -31,7 +31,7 @@ Las capturas automaticas se gestionan desde `conftest.py` con el hook `pytest_ru
 
 - Se generan solo ante fallos.
 - Se guardan en `screenshots/`.
-- El nombre usa una etiqueta corta del test, fecha y hora compacta.
+- El nombre usa una etiqueta corta del test.
 - Se adjuntan al reporte HTML cuando `pytest-html` esta disponible.
 
 ## Casos UI

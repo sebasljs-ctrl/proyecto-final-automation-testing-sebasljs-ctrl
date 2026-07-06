@@ -1,5 +1,4 @@
 from pathlib import Path
-from datetime import datetime
 
 import pytest
 from pytest_html import extras
@@ -44,9 +43,14 @@ def pytest_runtest_makereport(item, call):
 
     screenshots_dir = Path("screenshots")
     screenshots_dir.mkdir(exist_ok=True)
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     screenshot_name = SCREENSHOT_NAMES.get(item.name, item.name.replace("test_", ""))
-    screenshot_path = screenshots_dir / f"{screenshot_name}_{timestamp}.png"
+    screenshot_path = screenshots_dir / f"{screenshot_name}.png"
+    counter = 1
+
+    while screenshot_path.exists():
+        screenshot_path = screenshots_dir / f"{screenshot_name}_{counter}.png"
+        counter += 1
+
     driver_instance.save_screenshot(str(screenshot_path))
     logger.error("Screenshot saved after failure: %s", screenshot_path)
 
