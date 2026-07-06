@@ -24,7 +24,7 @@ def test_productos(driver):
     login_as_standard_user(driver)
     inventory_page = InventoryPage(driver)
 
-    logger.info("Validating inventory products and sorting control")
+    logger.info("Se revisan los productos y el filtro del inventario")
     assert inventory_page.title_text() == "Products"
     assert inventory_page.product_count() >= 1
     assert inventory_page.is_sort_visible()

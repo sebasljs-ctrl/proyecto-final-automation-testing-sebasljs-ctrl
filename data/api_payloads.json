@@ -1,8 +1,7 @@
 {
-  "new_post": {
+  "nueva_publicacion": {
     "title": "Proyecto final QA",
-    "body": "Prueba automatizada de creacion de recurso",
+    "body": "Prueba automatizada de creación de recurso",
     "userId": 1
   }
 }
-

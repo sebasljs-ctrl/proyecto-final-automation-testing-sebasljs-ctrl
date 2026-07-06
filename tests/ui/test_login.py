@@ -10,12 +10,12 @@ logger = get_logger(__name__)
 
 
 @pytest.mark.ui
-def test_login_valido(driver):
+def test_inicio_valido(driver):
     users = read_json("users.json")
     login_page = LoginPage(driver)
     inventory_page = InventoryPage(driver)
 
-    logger.info("Opening login page for valid login")
+    logger.info("Se abre la página de inicio para un ingreso válido")
     login_page.open()
     login_page.login(
         users["valid_user"]["username"],
@@ -27,12 +27,12 @@ def test_login_valido(driver):
 
 
 @pytest.mark.ui
-def test_login_invalido(driver):
+def test_inicio_invalido(driver):
     invalid_users = read_json("users.json")["invalid_users"]
     login_page = LoginPage(driver)
 
     for invalid_user in invalid_users:
-        logger.info("Opening login page for invalid login")
+        logger.info("Se abre la página de inicio para un ingreso inválido")
         login_page.open()
         login_page.login(invalid_user["username"], invalid_user["password"])
 

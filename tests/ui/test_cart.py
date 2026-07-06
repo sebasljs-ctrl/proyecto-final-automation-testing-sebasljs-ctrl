@@ -26,7 +26,7 @@ def test_carrito(driver):
     inventory_page = InventoryPage(driver)
     cart_page = CartPage(driver)
 
-    logger.info("Adding first product to cart")
+    logger.info("Se agrega el primer producto al carrito")
     product_name = inventory_page.add_first_product_to_cart()
 
     assert inventory_page.cart_badge_text() == "1"

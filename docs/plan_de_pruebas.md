@@ -1,62 +1,56 @@
 # Plan de pruebas
 
+Este documento resume qué se prueba, cómo se prueba y qué evidencia queda en el proyecto. No agrega más automatizaciones; solo ordena la información para que la entrega sea clara.
+
 ## Alcance
 
-El framework valida flujos principales del sitio Saucedemo y endpoints publicos de JSONPlaceholder.
+El proyecto valida los flujos principales de SauceDemo y algunos endpoints públicos de JSONPlaceholder.
 
 ## Objetivos
 
-- Verificar flujos UI completos con Selenium.
-- Validar escenarios positivos y negativos.
-- Ejecutar pruebas API con distintos metodos HTTP.
-- Generar reportes HTML, logs y capturas ante fallos.
-- Evidenciar el uso de Page Object Model para separar tests e interacciones web.
+El objetivo principal es comprobar que los flujos de interfaz funcionen correctamente con Selenium y que las pruebas de API respondan como se espera. También se busca dejar evidencia con reportes HTML, registros y capturas automáticas cuando una prueba de interfaz falle.
+
+El proyecto usa Page Object Model para separar la lógica de interacción con la página de las validaciones de la prueba. Esto hace que los casos sean más fáciles de leer y mantener.
 
 ## Estrategia Page Object Model
 
-La logica de Selenium queda encapsulada en `pages/`. Cada clase representa una pantalla del flujo automatizado:
+La lógica de Selenium queda dentro de `pages/`. Cada clase representa una pantalla del flujo automatizado.
 
 | Clase | Responsabilidad |
 | --- | --- |
-| LoginPage | Abrir Saucedemo, iniciar sesion y obtener errores de login |
-| InventoryPage | Validar inventario, productos, filtro y carrito |
-| CartPage | Validar producto agregado y avanzar a checkout |
-| CheckoutPage | Completar datos, finalizar compra y validar confirmacion |
+| LoginPage | Abre SauceDemo, inicia sesión y obtiene errores de ingreso |
+| InventoryPage | Valida inventario, productos, filtro y carrito |
+| CartPage | Valida el producto agregado y avanza a la compra |
+| CheckoutPage | Completa datos, finaliza la compra y valida la confirmación |
 
-Los tests de `tests/ui/` usan estos metodos de pagina y mantienen solo el flujo de negocio y las assertions.
+Las pruebas de `tests/ui/` usan los métodos de esas páginas. Así muestran el flujo del usuario y no quedan llenas de selectores.
 
-## Gestion de capturas
+## Gestión de capturas
 
-Las capturas automaticas se gestionan desde `conftest.py` con el hook `pytest_runtest_makereport`.
+Las capturas automáticas se gestionan desde `conftest.py` con el hook `pytest_runtest_makereport`.
 
-- Se generan solo ante fallos.
-- Se guardan en `screenshots/`.
-- El nombre usa una etiqueta corta del test.
-- Se adjuntan al reporte HTML cuando `pytest-html` esta disponible.
+Se generan solo cuando falla una prueba de interfaz. Se guardan en `screenshots/`. El nombre incluye el test y fecha/hora, por ejemplo `test_compra_20260706_183000.png`. Cuando `pytest-html` está disponible, la captura también se adjunta al reporte HTML.
 
-## Casos UI
+## Casos de interfaz
 
 | ID | Caso | Tipo |
 | --- | --- | --- |
-| UI-001 | Login valido redirige a inventario | Positivo |
-| UI-002 | Login invalido muestra error | Negativo |
+| UI-001 | Inicio de sesión válido redirige a inventario | Positivo |
+| UI-002 | Inicio de sesión inválido muestra error | Negativo |
 | UI-003 | Inventario muestra productos y filtro | Positivo |
 | UI-004 | Agregar producto al carrito | Positivo |
-| UI-005 | Checkout completo | Positivo |
+| UI-005 | Compra completa | Positivo |
 
-## Casos API
+## Casos de API
 
-| ID | Metodo | Caso |
+| ID | Método | Caso |
 | --- | --- | --- |
-| API-001 | GET | Obtener post existente |
-| API-002 | POST | Crear post |
-| API-003 | DELETE | Eliminar post |
+| API-001 | GET | Obtener publicación existente |
+| API-002 | POST | Crear publicación |
+| API-003 | DELETE | Eliminar publicación |
 
-El caso API-001 valida tanto respuesta exitosa como respuesta de error para cubrir ambos escenarios sin agregar casos innecesarios.
+El caso API-001 valida una respuesta exitosa y también una respuesta de error. Con eso se cubren ambos escenarios sin agregar casos innecesarios.
 
-## Criterios de aceptacion
+## Criterios de aceptación
 
-- Todas las pruebas deben ejecutarse de forma independiente.
-- Los reportes deben mostrar estado y duracion.
-- Los logs deben registrar pasos clave.
-- Ante fallos UI debe generarse una captura en `screenshots/`.
+Para considerar correcta la entrega, todas las pruebas deben poder ejecutarse de forma independiente. El reporte debe mostrar estado y duración de las pruebas. Los registros deben guardar pasos clave de ejecución. Si falla una prueba de interfaz, debe generarse una captura en `screenshots/`.

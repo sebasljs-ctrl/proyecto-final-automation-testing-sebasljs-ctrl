@@ -2,9 +2,9 @@
 
 Proyecto final del curso de QA Automation.
 
-El trabajo consiste en un framework de pruebas automatizadas desarrollado en Python. Incluye pruebas de interfaz con Selenium WebDriver, pruebas de API con Requests, uso de Page Object Model, datos externos, reportes, logs y ejecucion automatica con GitHub Actions.
+Este proyecto es un conjunto de pruebas automatizadas hecho en Python. Incluye pruebas de interfaz con Selenium, pruebas de API con Requests, Page Object Model, datos externos, reportes, registros y ejecución automática con GitHub Actions.
 
-## Repositorio publico
+## Repositorio público
 
 ```text
 https://github.com/sebasljs-ctrl/proyecto-final-automation-testing-sebasljs-ctrl
@@ -12,19 +12,20 @@ https://github.com/sebasljs-ctrl/proyecto-final-automation-testing-sebasljs-ctrl
 
 ## Sitios utilizados
 
-- UI: https://www.saucedemo.com/
-- API: https://jsonplaceholder.typicode.com/
+Interfaz web: https://www.saucedemo.com/
 
-## Tecnologias utilizadas
+API: https://jsonplaceholder.typicode.com/
 
-- Python
-- Pytest
-- Selenium WebDriver
-- Requests
-- Pytest HTML
-- Git
-- GitHub
-- GitHub Actions
+## Tecnologías utilizadas
+
+1. Python
+2. Pytest
+3. Selenium
+4. Requests
+5. Pytest HTML
+6. Git
+7. GitHub
+8. GitHub Actions
 
 ## Estructura del proyecto
 
@@ -32,127 +33,134 @@ https://github.com/sebasljs-ctrl/proyecto-final-automation-testing-sebasljs-ctrl
 pages/              Page Object Model de las pantallas web
 tests/ui/           Pruebas de interfaz
 tests/api/          Pruebas de API
-utils/              Configuracion, datos, driver y logging
+utils/              Configuración, datos, navegador y registros
 data/               Datos externos en formato JSON
 reports/            Reportes HTML generados por Pytest
-screenshots/        Capturas automaticas ante fallos
-logs/               Logs de ejecucion
-scripts/            Comandos simples para ejecutar pruebas
-.github/workflows/  Workflow de GitHub Actions
+screenshots/        Capturas automáticas ante fallos
+logs/               Registros de ejecución
+scripts/            Atajos simples para ejecutar pruebas
+.github/workflows/  Flujo automático de GitHub Actions
 ```
 
 ## Page Object Model
 
-Las pruebas de interfaz estan organizadas con Page Object Model para separar la interaccion con la pagina de las validaciones de cada test.
+Las pruebas de interfaz están organizadas con Page Object Model. La idea es separar lo que hace la página de lo que valida cada prueba.
 
-- `pages/` contiene los localizadores y acciones de cada pantalla
-- `tests/ui/` contiene los casos de prueba de interfaz
-- `pages/base_page.py` centraliza esperas explicitas, clicks, escritura de texto y lectura de elementos
+La carpeta `pages/` contiene los localizadores y las acciones de cada pantalla. La carpeta `tests/ui/` contiene los casos de prueba de interfaz. El archivo `pages/base_page.py` centraliza esperas, clicks, escritura de texto y lectura de elementos.
 
-Clases principales
+Clases principales:
 
-- `LoginPage` abre el sitio, realiza el login y valida mensajes de error
-- `InventoryPage` valida inventario, productos, filtro y carrito
-- `CartPage` valida el producto agregado y permite acceder al checkout
-- `CheckoutPage` carga los datos de compra, finaliza el flujo y valida la confirmacion
+1. `LoginPage` abre el sitio, realiza el inicio de sesión y valida mensajes de error.
+2. `InventoryPage` valida inventario, productos, filtro y carrito.
+3. `CartPage` valida el producto agregado y permite acceder al checkout.
+4. `CheckoutPage` carga los datos de compra, finaliza el flujo y valida la confirmación.
 
-## Instalacion
+## Instalación
 
-Crear y activar el entorno virtual
+Crear y activar el entorno virtual:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-Instalar las dependencias
+Instalar las dependencias:
 
 ```powershell
 python -m pip install -r requirements.txt
 ```
 
-En esta PC el entorno ya esta creado en la carpeta anterior del proyecto. Por eso tambien se pueden usar los scripts de `scripts/` sin activar nada manualmente.
+También se pueden usar los atajos de `scripts/` para ejecutar las pruebas sin escribir comandos largos.
 
-## Ejecucion rapida
+## Ejecución rápida
 
-Desde PowerShell, ubicado en la carpeta del proyecto:
+Desde PowerShell, ubicado en la carpeta del proyecto, se puede ejecutar todo con:
 
 ```powershell
 .\scripts\ejecutar_todo.ps1
 ```
 
-Ejecutar solo pruebas UI
+Para ejecutar solo las pruebas de interfaz:
 
 ```powershell
 .\scripts\ejecutar_ui.ps1
 ```
 
-Ejecutar solo pruebas API
+Para ejecutar solo las pruebas de API:
 
 ```powershell
 .\scripts\ejecutar_api.ps1
 ```
 
-Abrir el reporte
+Para abrir el reporte:
 
 ```powershell
 .\scripts\abrir_reporte.ps1
 ```
 
-## Ejecucion manual
+## Ejecución manual
 
-La suite incluye
+La suite incluye 5 casos de prueba de interfaz con Selenium y 3 casos de prueba de API con Requests. También incluye escenarios positivos, escenarios negativos y datos de prueba leídos desde archivos externos.
 
-- 5 casos de prueba UI con Selenium
-- 3 casos de prueba API con Requests
-- Escenarios positivos y negativos
-- Datos de prueba leidos desde archivos externos
-
-Ejecutar todas las pruebas
+Ejecutar todas las pruebas:
 
 ```powershell
 python -m pytest
 ```
 
-Ejecutar solo las pruebas UI
+Ejecutar solo las pruebas de interfaz:
 
 ```powershell
 python -m pytest -m ui
 ```
 
-Ejecutar solo las pruebas API
+Ejecutar solo las pruebas de API:
 
 ```powershell
 python -m pytest -m api
 ```
 
-## Pruebas UI
+## Qué se prueba
 
-Las pruebas de interfaz trabajan sobre SauceDemo y cubren estos flujos
+La idea de la suite es simple: revisar un flujo real de compra en SauceDemo y probar tres operaciones básicas contra una API pública. No se agregaron casos de más; la suite queda chica, clara y fácil de ejecutar.
 
-- Login valido
-- Login invalido
-- Validacion del inventario
-- Agregado de producto al carrito
-- Checkout completo
+En `test_inicio_valido` se abre SauceDemo, se ingresan usuario y clave válidos desde `data/users.json`, y se revisa que el sitio llegue al inventario. También se valida que el título visible de la pantalla sea `Products`, porque ese texto confirma que el ingreso funcionó.
 
-## Pruebas API
+En `test_inicio_invalido` se prueban usuarios incorrectos desde `data/users.json`. La prueba revisa que SauceDemo muestre un mensaje de error. Este caso cubre el escenario negativo que pide la entrega.
 
-Las pruebas de API trabajan sobre JSONPlaceholder e incluyen validaciones de respuesta, codigos HTTP y contenido JSON.
+En `test_productos` se inicia sesión y se revisa que el inventario esté disponible. La prueba valida que haya al menos un producto y que el filtro de ordenamiento esté visible.
+
+En `test_carrito` se inicia sesión, se agrega el primer producto al carrito y se revisa que el contador marque `1`. Después se abre el carrito y se confirma que el producto agregado sea el mismo que aparece listado.
+
+En `test_compra` se inicia sesión, se agrega un producto, se entra al carrito y se completa la compra con los datos de `data/checkout_data.json`. Al final se valida el mensaje real de SauceDemo: `Thank you for your order!`.
+
+En `test_obtener_publicacion` se consulta un recurso existente en JSONPlaceholder y se revisa que responda `200`. También se consulta uno inexistente y se valida que responda `404`.
+
+En `test_crear_publicacion` se envían los datos de `data/api_payloads.json` y se revisa que la API responda `201`. También se valida que el título, el contenido y el usuario vuelvan en la respuesta.
+
+En `test_eliminar_publicacion` se elimina un recurso de prueba y se revisa que la API responda `200`.
+
+## Pruebas de interfaz
+
+Las pruebas de interfaz trabajan sobre SauceDemo y cubren inicio de sesión válido, inicio de sesión inválido, validación del inventario, agregado de producto al carrito y compra completa.
+
+## Pruebas de API
+
+Las pruebas de API trabajan sobre JSONPlaceholder. Validan respuestas, códigos HTTP y contenido JSON.
 
 ## Reportes
 
-El reporte HTML se genera automaticamente en
+El reporte HTML se genera automáticamente en:
 
 ```text
 reports/report.html
 ```
 
-El reporte permite revisar los tests ejecutados, su estado, duracion y evidencia de fallos cuando corresponde.
+El reporte permite revisar las pruebas ejecutadas, su estado, duración y evidencia de fallos cuando corresponde.
 
 ## Evidencias
 
-Las evidencias se guardan en estas carpetas
+Las evidencias principales quedan en estas carpetas:
 
 ```text
 screenshots/
@@ -160,35 +168,35 @@ logs/
 reports/
 ```
 
-Archivos principales
+Archivos principales:
 
 ```text
-screenshots/           Capturas automaticas ante fallos UI
+screenshots/           Capturas automáticas ante fallos de interfaz
 logs/test_execution.log
 reports/report.html
 ```
 
-Las capturas se generan desde `conftest.py` cuando falla una prueba de interfaz. El nombre del archivo usa una etiqueta corta del test, por ejemplo `checkout.png` o `carrito.png`.
+Las capturas se generan desde `conftest.py` cuando falla una prueba de interfaz. El nombre del archivo incluye el nombre del test y fecha/hora, por ejemplo `test_compra_20260706_183000.png`.
 
 ## Datos de prueba
 
 Los datos se leen desde archivos JSON ubicados en `data/`.
 
 ```text
-users.json             Usuarios validos e invalidos para SauceDemo
-checkout_data.json     Datos usados en el checkout
-api_payloads.json      Datos usados en las pruebas API
+users.json             Usuarios válidos e inválidos para SauceDemo
+checkout_data.json     Datos usados en la compra
+api_payloads.json      Datos usados en las pruebas de API
 ```
 
 ## GitHub Actions
 
-El workflow se encuentra en
+El flujo automático se encuentra en:
 
 ```text
 .github/workflows/tests.yml
 ```
 
-Se ejecuta en cada `push` o `pull_request` y guarda reportes, logs y capturas como artefactos.
+Se ejecuta en cada `push` o `pull_request` y guarda reportes, registros y capturas como evidencias.
 
 ## Control de versiones
 

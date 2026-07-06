@@ -9,7 +9,7 @@ if (Test-Path $localVenv) {
 } elseif (Test-Path $parentVenv) {
     $python = $parentVenv
 } else {
-    Write-Host "No encontre un entorno virtual. Ejecuta: python -m venv .venv"
+    Write-Host "No encontré un entorno virtual. Ejecuta: python -m venv .venv"
     exit 1
 }
 

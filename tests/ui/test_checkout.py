@@ -22,14 +22,14 @@ def login_as_standard_user(driver):
 
 
 @pytest.mark.ui
-def test_checkout(driver):
+def test_compra(driver):
     checkout_data = read_json("checkout_data.json")["customer"]
     login_as_standard_user(driver)
     inventory_page = InventoryPage(driver)
     cart_page = CartPage(driver)
     checkout_page = CheckoutPage(driver)
 
-    logger.info("Completing checkout flow")
+    logger.info("Se completa la compra")
     inventory_page.add_first_product_to_cart()
     inventory_page.open_cart()
     cart_page.go_to_checkout()

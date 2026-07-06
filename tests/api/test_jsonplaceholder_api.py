@@ -10,8 +10,8 @@ logger = get_logger(__name__)
 
 
 @pytest.mark.api
-def test_api_get():
-    logger.info("Requesting existing and non existing posts")
+def test_obtener_publicacion():
+    logger.info("Se consulta una publicación existente y otra inexistente")
     response = requests.get(f"{API_BASE_URL}/posts/1", timeout=10)
     body = response.json()
 
@@ -25,9 +25,9 @@ def test_api_get():
 
 
 @pytest.mark.api
-def test_api_post():
-    payload = read_json("api_payloads.json")["new_post"]
-    logger.info("Creating post with API")
+def test_crear_publicacion():
+    payload = read_json("api_payloads.json")["nueva_publicacion"]
+    logger.info("Se crea una publicación con la API")
     response = requests.post(f"{API_BASE_URL}/posts", json=payload, timeout=10)
     body = response.json()
 
@@ -39,8 +39,8 @@ def test_api_post():
 
 
 @pytest.mark.api
-def test_api_delete():
-    logger.info("Deleting post with API")
+def test_eliminar_publicacion():
+    logger.info("Se elimina una publicación con la API")
     response = requests.delete(f"{API_BASE_URL}/posts/1", timeout=10)
 
     assert response.status_code == 200

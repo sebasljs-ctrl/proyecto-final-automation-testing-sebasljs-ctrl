@@ -12,4 +12,3 @@ class CartPage(BasePage):
 
     def go_to_checkout(self):
         self.click(self.CHECKOUT_BUTTON)
-

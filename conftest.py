@@ -1,4 +1,6 @@
+from datetime import datetime
 from pathlib import Path
+import re
 
 import pytest
 from pytest_html import extras
@@ -10,22 +12,17 @@ from utils.logger import get_logger
 logger = get_logger(__name__)
 
 
-SCREENSHOT_NAMES = {
-    "test_login_valido": "login_valido",
-    "test_login_invalido": "login_invalido",
-    "test_productos": "productos",
-    "test_carrito": "carrito",
-    "test_checkout": "checkout",
-}
+def safe_filename(value):
+    return re.sub(r"[^A-Za-z0-9_]+", "_", value).strip("_").lower()
 
 
 @pytest.fixture
 def driver(request):
     driver_instance = create_driver()
     request.node.driver = driver_instance
-    logger.info("Browser started for test: %s", request.node.name)
+    logger.info("Se abrió el navegador para la prueba: %s", request.node.name)
     yield driver_instance
-    logger.info("Browser closed for test: %s", request.node.name)
+    logger.info("Se cerró el navegador para la prueba: %s", request.node.name)
     driver_instance.quit()
 
 
@@ -43,7 +40,9 @@ def pytest_runtest_makereport(item, call):
 
     screenshots_dir = Path("screenshots")
     screenshots_dir.mkdir(exist_ok=True)
-    screenshot_name = SCREENSHOT_NAMES.get(item.name, item.name.replace("test_", ""))
+    test_name = safe_filename(item.name)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    screenshot_name = f"{test_name}_{timestamp}"
     screenshot_path = screenshots_dir / f"{screenshot_name}.png"
     counter = 1
 
@@ -52,7 +51,7 @@ def pytest_runtest_makereport(item, call):
         counter += 1
 
     driver_instance.save_screenshot(str(screenshot_path))
-    logger.error("Screenshot saved after failure: %s", screenshot_path)
+    logger.error("Se guardó una captura por el fallo: %s", screenshot_path)
 
     html_plugin = item.config.pluginmanager.getplugin("html")
     if html_plugin:
